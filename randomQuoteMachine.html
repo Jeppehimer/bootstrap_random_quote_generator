@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+        <title>Random Quote Generator</title>
+
+        <!-- import quotes file -->
+        <script src="quotesFCC.js"></script>
+
+        <script>
+            // initial quote on page load
+            window.onload = init;
+            function init() {
+                generateQuote();
+            }
+
+            function generateQuote() {
+                let randomIndex = Math.floor(Math.random()*QUOTEBANK.length);
+                let selectedQuote = QUOTEBANK[randomIndex];
+
+                let twitterLink = "https://twitter.com/intent/tweet?text=";
+                // add quote to tweet
+                let quoteInURIFormat = encodeURIComponent(selectedQuote.quote);
+                twitterLink += '"'+ quoteInURIFormat + '"';
+                //add author to tweet
+                let authorInURIFormat = encodeURIComponent(selectedQuote.author);
+                twitterLink += " -" + authorInURIFormat;
+
+                document.getElementById("tweet-quote").href = twitterLink;
+                document.getElementById("text").innerText = selectedQuote.quote;
+                document.getElementById("author").innerText = selectedQuote.author;
+            }
+        </script>
+    </head>
+
+    <body>
+        <div class="container">
+            <div class="row py-5">
+                <div class="col-md-10  offset-md-1">
+                    <wrapper id="quote-box">
+                        <div class="card">
+                            <div class="card-header">
+                            Quotes To Live By
+                            </div>
+                            <div class="card-body">
+                                <blockquote class="blockquote mb-0">
+                                <div id="text"></div>
+                                <footer class="blockquote-footer font-italic" id="author"><cite title="Source Title">Source Title</cite></footer>
+                                </blockquote>
+                                <button id="new-quote" class="btn btn-dark" onClick="generateQuote();">New Quote</button>
+                                <a id="tweet-quote" href="#" class="btn btn-primary" target="_blank" title="Tweet this quote!">Tweet Quote</a>    
+                            </div>
+                        </div>
+                    </wrapper>
+                </div>
+            </div>
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+        <!-- FreeCodeCamp Tests -->
+        <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+    </body>
+</html>
+
